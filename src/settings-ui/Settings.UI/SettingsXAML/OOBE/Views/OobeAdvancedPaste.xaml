@@ -22,6 +22,10 @@
                     x:Name="PasteAsJsonHotkeyControl"
                     x:Uid="Oobe_AdvancedPasteJson_HowToUse"
                     Visibility="Collapsed" />
+                <controls:ShortcutWithTextLabelControl
+                    x:Name="RewriteProfessionallyAndPasteAsPlainTextHotkeyControl"
+                    x:Uid="Oobe_AdvancedPasteRewriteProfessionally_HowToUse"
+                    Visibility="Collapsed" />
 
                 <StackPanel Orientation="Horizontal" Spacing="8">
                     <Button x:Uid="OOBE_Settings" Click="SettingsLaunchButton_Click" />

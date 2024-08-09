@@ -39,9 +39,13 @@ namespace Microsoft.PowerToys.Settings.UI.Views
 
         private void SaveOpenAIKey()
         {
-            if (!string.IsNullOrEmpty(AdvancedPaste_EnableAIDialogOpenAIApiKey.Text))
+            // if (!string.IsNullOrEmpty(AdvancedPaste_EnableAIDialogOpenAIApiKey.Text))
+            // {
+            //     ViewModel.EnableAI(AdvancedPaste_EnableAIDialogOpenAIApiKey.Text);
+            // }
+            if (!string.IsNullOrEmpty(AdvancedPaste_EnableAIDialogLocalLLM.Text))
             {
-                ViewModel.EnableAI(AdvancedPaste_EnableAIDialogOpenAIApiKey.Text);
+                ViewModel.EnableLocalAI(AdvancedPaste_EnableAIDialogLocalLLM.Text);
             }
         }
 
@@ -52,8 +56,7 @@ namespace Microsoft.PowerToys.Settings.UI.Views
             EnableAIDialog.SecondaryButtonText = resourceLoader.GetString("EnableAIDialog_CancelBtnText");
             EnableAIDialog.PrimaryButtonCommand = SaveOpenAIKeyCommand;
 
-            AdvancedPaste_EnableAIDialogOpenAIApiKey.Text = string.Empty;
-
+            // AdvancedPaste_EnableAIDialogOpenAIApiKey.Text = string.Empty;
             await ShowEnableDialogAsync();
         }
 
@@ -69,7 +72,15 @@ namespace Microsoft.PowerToys.Settings.UI.Views
 
         private void AdvancedPaste_EnableAIDialogOpenAIApiKey_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (AdvancedPaste_EnableAIDialogOpenAIApiKey.Text.Length > 0)
+            // if (AdvancedPaste_EnableAIDialogOpenAIApiKey.Text.Length > 0 || AdvancedPaste_EnableAIDialogLocalLLM.Text.Length > 0)
+            // {
+            //     EnableAIDialog.IsPrimaryButtonEnabled = true;
+            // }
+            // else
+            // {
+            //     EnableAIDialog.IsPrimaryButtonEnabled = false;
+            // }
+            if (AdvancedPaste_EnableAIDialogLocalLLM.Text.Length > 0)
             {
                 EnableAIDialog.IsPrimaryButtonEnabled = true;
             }
@@ -78,5 +89,10 @@ namespace Microsoft.PowerToys.Settings.UI.Views
                 EnableAIDialog.IsPrimaryButtonEnabled = false;
             }
         }
+
+        /* private void AdvancedPaste_EnableAIDialogLocalLLM_Loaded(object sender, RoutedEventArgs e)
+        {
+            AdvancedPaste_EnableAIDialogLocalLLM.Text = ViewModel.LocalLLMEndpoint;
+        }*/
     }
 }

@@ -10,5 +10,14 @@ namespace AdvancedPaste.Models
             Markdown,
             Json,
             Custom,
+            Proofread,
+            Rewrite,
+            WriteProfessionally,
+            WriteConcisely,
+            WriteFriendly,
+            Summarize,
+            SummarizeToKeyPoints,
+            SummarizeToTable,
+            SummarizeToList,
     }
 }

@@ -2005,11 +2005,18 @@ Made with 💗 by Microsoft and the PowerToys community.</value>
   <data name="PasteAsJson_Shortcut.Header" xml:space="preserve">
     <value>Paste as JSON directly</value>
   </data>
+	<!--// CHANGED-->	
+  <data name="RewriteProfessionallyAndPasteAsPlainText_Shortcut.Header" xml:space="preserve">
+    <value>Rewrite Professionally and Paste as Plain Text directly</value>
+  </data>
   <data name="PasteAsCustom_Shortcut.Header" xml:space="preserve">
     <value>Paste as Custom with AI directly</value>
   </data>
   <data name="AdvancedPaste_EnableAIDialogOpenAIApiKey.Text" xml:space="preserve">
     <value>OpenAI API key:</value>
+  </data>
+  <data name="AdvancedPaste_EnableAIDialogLocalLLM.Text" xml:space="preserve">
+    <value>LocalLLM Endpoint:</value>
   </data>
   <data name="EnableAIDialog_SaveBtnText" xml:space="preserve">
     <value>Save</value>
@@ -3790,7 +3797,11 @@ Activate by holding the key for the character you want to add an accent to, then
   <data name="Oobe_AdvancedPasteJson_HowToUse.Text" xml:space="preserve">
     <value>to paste your clipboard data as JSON. Note: Clipboard content data has to contain XML or CSV text.</value>
   </data>
-  <data name="Oobe_AdvancedPasteCustom_HowToUse.Text" xml:space="preserve">
+    <!--// CHANGED-->
+	<data name="Oobe_AdvancedPasteRewriteProfessionally_HowToUse.Text" xml:space="preserve">
+    <value>to rewrite clipboard data into professional text.</value>
+  </data>
+	<data name="Oobe_AdvancedPasteCustom_HowToUse.Text" xml:space="preserve">
     <value>to open AI-powered dialog to enter query and convert your data to any format you need.</value>
   </data>
   <data name="Shell_CmdNotFound.Content" xml:space="preserve">
@@ -4158,7 +4169,7 @@ Activate by holding the key for the character you want to add an accent to, then
     <value>OpenAI Terms</value>
   </data>
   <data name="AdvancedPaste_EnableAIDialog_Description.Text" xml:space="preserve">
-    <value>Paste with AI allows you to format your clipboard content into any format you need. Learn more about the terms of conditions while using OpenAI and privacy at Microsoft:</value>
+    <value>Paste with AI allows you to format your clipboard content into any format you need.</value>
   </data>
   <data name="AdvancedPaste_EnableAIDialog_LoginIntoText.Text" xml:space="preserve">
     <value>• Login into your</value>

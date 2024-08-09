@@ -58,7 +58,7 @@
                         Style="{StaticResource CaptionTextBlockStyle}">
                         <Run x:Uid="AIMistakeNote" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
                     </TextBlock>
-                    <TextBlock
+                    <!--<TextBlock
                         Margin="4,0,2,0"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Center"
@@ -72,8 +72,8 @@
                         <ToolTipService.ToolTip>
                             <TextBlock Text="https://openai.com/policies/terms-of-use" />
                         </ToolTipService.ToolTip>
-                    </TextBlock>
-                    <TextBlock
+                    </TextBlock>-->
+                    <!--<TextBlock
                         Margin="0,0,2,0"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Center"
@@ -92,7 +92,7 @@
                         <ToolTipService.ToolTip>
                             <TextBlock Text="https://openai.com/policies/privacy-policy" />
                         </ToolTipService.ToolTip>
-                    </TextBlock>
+                    </TextBlock>-->
                 </StackPanel>
             </controls:PromptBox.Footer>
         </controls:PromptBox>
@@ -123,7 +123,7 @@
                             <ToolTipService.ToolTip>
                                 <TextBlock>
                                     <Run Text="{x:Bind Name}" />
-                                    <Run Text="(" /><Run Text="Ctrl" /><Run Text="+" /><Run Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={StaticResource listViewIndexConverter}}" /><Run Text=")" />
+                                    <!--<Run Text="(" /><Run Text="Ctrl" /><Run Text="+" /><Run Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={StaticResource listViewIndexConverter}}" /><Run Text=")" />-->
                                 </TextBlock>
                             </ToolTipService.ToolTip>
                             <Grid.ColumnDefinitions>
@@ -155,7 +155,7 @@
                                 VerticalAlignment="Center"
                                 Foreground="{ThemeResource TextFillColorSecondaryBrush}"
                                 Style="{StaticResource CaptionTextBlockStyle}">
-                                <Run Text="Ctrl" /><Run Text="+" /><Run Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={StaticResource listViewIndexConverter}}" />
+                                <!--<Run Text="Ctrl" /><Run Text="+" /><Run Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={StaticResource listViewIndexConverter}}" />-->
                             </TextBlock>
                         </Grid>
                     </DataTemplate>

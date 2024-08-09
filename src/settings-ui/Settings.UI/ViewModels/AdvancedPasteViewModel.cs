@@ -4,6 +4,7 @@
 
 using System;
 using System.Globalization;
+using System.Net;
 using System.Text.Json;
 using System.Timers;
 using global::PowerToys.GPOWrapper;
@@ -11,6 +12,7 @@ using Microsoft.PowerToys.Settings.UI.Library;
 using Microsoft.PowerToys.Settings.UI.Library.Helpers;
 using Microsoft.PowerToys.Settings.UI.Library.Interfaces;
 using Microsoft.Win32;
+using Newtonsoft.Json.Linq;
 using Windows.Security.Credentials;
 
 namespace Microsoft.PowerToys.Settings.UI.ViewModels
@@ -137,7 +139,24 @@ namespace Microsoft.PowerToys.Settings.UI.ViewModels
             return cred is not null;
         }
 
-        public bool IsOpenAIEnabled => OpenAIKeyExists() && !IsOnlineAIModelsDisallowedByGPO;
+        private bool LocalLLMExists()
+        {
+            // return !string.IsNullOrEmpty(_advancedPasteSettings.Properties.LocalLLMEndpoint);
+            try
+            {
+                PasswordVault vault = new PasswordVault();
+                PasswordCredential credendpoint = vault.Retrieve("localllm_endpoint", "PowerToys_AdvancedPaste_LocalLLMEndpoint");
+                return !string.IsNullOrEmpty(credendpoint.Password.ToString());
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+
+            return false;
+        }
+
+        public bool IsOpenAIEnabled => LocalLLMExists() || (OpenAIKeyExists() && !IsOnlineAIModelsDisallowedByGPO);
 
         public bool IsEnabledGpoConfigured
         {
@@ -223,6 +242,11 @@ namespace Microsoft.PowerToys.Settings.UI.ViewModels
             get => IsClipboardHistoryDisabledByGPO() && _isEnabled;
         }
 
+        /*public string LocalLLMEndpoint
+        {
+            get => _advancedPasteSettings.Properties.LocalLLMEndpoint;
+        }*/
+
         public HotkeySettings AdvancedPasteUIShortcut
         {
             get => _advancedPasteSettings.Properties.AdvancedPasteUIShortcut;
@@ -291,6 +315,23 @@ namespace Microsoft.PowerToys.Settings.UI.ViewModels
             }
         }
 
+        public HotkeySettings RewriteProfessionallyAndPasteAsPlainTextShortcut
+        {
+            get => _advancedPasteSettings.Properties.RewriteProfessionallyAndPasteAsPlainTextShortcut;
+            set
+            {
+                if (_advancedPasteSettings.Properties.RewriteProfessionallyAndPasteAsPlainTextShortcut != value)
+                {
+                    _advancedPasteSettings.Properties.RewriteProfessionallyAndPasteAsPlainTextShortcut = value ?? new HotkeySettings();
+                    OnPropertyChanged(nameof(RewriteProfessionallyAndPasteAsPlainTextShortcut));
+                    OnPropertyChanged(nameof(IsConflictingCopyShortcut));
+
+                    _settingsUtils.SaveSettings(_advancedPasteSettings.ToJsonString(), AdvancedPasteSettings.ModuleName);
+                    NotifySettingsChanged();
+                }
+            }
+        }
+
         public bool ShowCustomPreview
         {
             get => _advancedPasteSettings.Properties.ShowCustomPreview;
@@ -319,12 +360,14 @@ namespace Microsoft.PowerToys.Settings.UI.ViewModels
 
         public bool IsConflictingCopyShortcut
         {
+            // CHANGED
             get
             {
                 return PasteAsPlainTextShortcut.ToString() == "Ctrl + V" || PasteAsPlainTextShortcut.ToString() == "Ctrl + Shift + V" ||
                     AdvancedPasteUIShortcut.ToString() == "Ctrl + V" || AdvancedPasteUIShortcut.ToString() == "Ctrl + Shift + V" ||
                     PasteAsMarkdownShortcut.ToString() == "Ctrl + V" || PasteAsMarkdownShortcut.ToString() == "Ctrl + Shift + V" ||
-                    PasteAsJsonShortcut.ToString() == "Ctrl + V" || PasteAsJsonShortcut.ToString() == "Ctrl + Shift + V";
+                    PasteAsJsonShortcut.ToString() == "Ctrl + V" || PasteAsJsonShortcut.ToString() == "Ctrl + Shift + V" ||
+                    RewriteProfessionallyAndPasteAsPlainTextShortcut.ToString() == "Ctrl + V" || RewriteProfessionallyAndPasteAsPlainTextShortcut.ToString() == "Ctrl + Shift + V";
             }
         }
 
@@ -377,16 +420,33 @@ namespace Microsoft.PowerToys.Settings.UI.ViewModels
 
         internal void DisableAI()
         {
+            PasswordVault vault = new PasswordVault();
             try
             {
-                PasswordVault vault = new PasswordVault();
                 PasswordCredential cred = vault.Retrieve("https://platform.openai.com/api-keys", "PowerToys_AdvancedPaste_OpenAIKey");
                 vault.Remove(cred);
-                OnPropertyChanged(nameof(IsOpenAIEnabled));
             }
             catch (Exception)
             {
             }
+
+            try
+            {
+                PasswordCredential credendpoint = vault.Retrieve("localllm_endpoint", "PowerToys_AdvancedPaste_LocalLLMEndpoint");
+                vault.Remove(credendpoint);
+            }
+            catch (Exception)
+            {
+            }
+
+            OnPropertyChanged(nameof(IsOpenAIEnabled));
+
+            /*
+            _advancedPasteSettings.Properties.LocalLLMEndpoint = string.Empty; // ?? AdvancedPasteProperties.DefaultLocalLLMEndpoint;
+            _settingsUtils.SaveSettings(_advancedPasteSettings.ToJsonString(), AdvancedPasteSettings.ModuleName);
+            OnPropertyChanged(nameof(IsOpenAIEnabled));
+            NotifySettingsChanged();
+            */
         }
 
         internal void EnableAI(string password)
@@ -395,6 +455,25 @@ namespace Microsoft.PowerToys.Settings.UI.ViewModels
             {
                 PasswordVault vault = new PasswordVault();
                 PasswordCredential cred = new PasswordCredential("https://platform.openai.com/api-keys", "PowerToys_AdvancedPaste_OpenAIKey", password);
+                vault.Add(cred);
+                OnPropertyChanged(nameof(IsOpenAIEnabled));
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        internal void EnableLocalAI(string endpoint)
+        {
+            /*_advancedPasteSettings.Properties.LocalLLMEndpoint = endpoint; // ?? AdvancedPasteProperties.DefaultLocalLLMEndpoint;
+            _settingsUtils.SaveSettings(_advancedPasteSettings.ToJsonString(), AdvancedPasteSettings.ModuleName);
+            OnPropertyChanged(nameof(IsOpenAIEnabled));
+            NotifySettingsChanged();*/
+
+            try
+            {
+                PasswordVault vault = new PasswordVault();
+                PasswordCredential cred = new PasswordCredential("localllm_endpoint", "PowerToys_AdvancedPaste_LocalLLMEndpoint", endpoint);
                 vault.Add(cred);
                 OnPropertyChanged(nameof(IsOpenAIEnabled));
             }

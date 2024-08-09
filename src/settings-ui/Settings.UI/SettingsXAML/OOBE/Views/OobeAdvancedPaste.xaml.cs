@@ -38,6 +38,7 @@ namespace Microsoft.PowerToys.Settings.UI.OOBE.Views
             AdvancedPasteUIHotkeyControl.Keys = SettingsRepository<AdvancedPasteSettings>.GetInstance(new SettingsUtils()).SettingsConfig.Properties.AdvancedPasteUIShortcut.GetKeysList();
             PasteAsPlainTextHotkeyControl.Keys = SettingsRepository<AdvancedPasteSettings>.GetInstance(new SettingsUtils()).SettingsConfig.Properties.PasteAsPlainTextShortcut.GetKeysList();
             PasteAsMarkdownHotkeyControl.Keys = SettingsRepository<AdvancedPasteSettings>.GetInstance(new SettingsUtils()).SettingsConfig.Properties.PasteAsMarkdownShortcut.GetKeysList();
+            RewriteProfessionallyAndPasteAsPlainTextHotkeyControl.Keys = SettingsRepository<AdvancedPasteSettings>.GetInstance(new SettingsUtils()).SettingsConfig.Properties.RewriteProfessionallyAndPasteAsPlainTextShortcut.GetKeysList();
 
             // TODO(stefan): Check how to remove additional space if item is set to Collapsed.
             if (PasteAsMarkdownHotkeyControl.Keys.Count > 0)
@@ -49,6 +50,13 @@ namespace Microsoft.PowerToys.Settings.UI.OOBE.Views
             if (PasteAsJsonHotkeyControl.Keys.Count > 0)
             {
                 PasteAsJsonHotkeyControl.Visibility = Microsoft.UI.Xaml.Visibility.Visible;
+            }
+
+            // CHANGED
+            RewriteProfessionallyAndPasteAsPlainTextHotkeyControl.Keys = SettingsRepository<AdvancedPasteSettings>.GetInstance(new SettingsUtils()).SettingsConfig.Properties.RewriteProfessionallyAndPasteAsPlainTextShortcut.GetKeysList();
+            if (RewriteProfessionallyAndPasteAsPlainTextHotkeyControl.Keys.Count > 0)
+            {
+                RewriteProfessionallyAndPasteAsPlainTextHotkeyControl.Visibility = Microsoft.UI.Xaml.Visibility.Visible;
             }
         }
 

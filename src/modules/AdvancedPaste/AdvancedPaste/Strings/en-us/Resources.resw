@@ -121,7 +121,8 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AIMistakeNote.Text" xml:space="preserve">
-    <value>AI can make mistakes.</value>
+    <value>Powered by Intel® XPU</value>
+    <!--<value>Powered by AMD Ryzen™ AI</value>-->
   </data>
   <data name="ClipboardDataTypeMismatchWarning" xml:space="preserve">
     <value>Clipboard data is not text</value>
@@ -158,6 +159,33 @@
   </data>
   <data name="PasteAsJson" xml:space="preserve">
     <value>Paste as JSON</value>
+  </data>
+	<data name="ProofreadAndPasteAsPlainText" xml:space="preserve">
+    <value>Proofread and paste as plain text</value>
+  </data>
+  <data name="RewriteAndPasteAsPlainText" xml:space="preserve">
+    <value>Rewrite and paste as plain text</value>
+  </data>
+	<data name="RewriteProfessionallyAndPasteAsPlainText" xml:space="preserve">
+    <value>Rewrite professionally and paste as plain text</value>
+  </data>
+	<data name="RewriteConciselyAndPasteAsPlainText" xml:space="preserve">
+    <value>Rewrite concisely and paste as plain text</value>
+  </data>
+  <data name="RewriteFriendlyAndPasteAsPlainText" xml:space="preserve">
+    <value>Rewrite friendly and paste as plain text</value>
+  </data>
+  <data name="SummarizeAndPasteAsPlainText" xml:space="preserve">
+    <value>Summarize and paste as plain text</value>
+  </data>
+  <data name="SummarizeToKeyPointsAndPasteAsPlainText" xml:space="preserve">
+    <value>Summarize to key points and paste as plain text</value>
+  </data>
+  <data name="SummarizeToTableAndPasteAsPlainText" xml:space="preserve">
+    <value>Summarize to table and paste as plain text</value>
+  </data>
+  <data name="SummarizeToListAndPasteAsPlainText" xml:space="preserve">
+    <value>Summarize to list and paste as plain text</value>
   </data>
   <data name="PasteAsMarkdown" xml:space="preserve">
     <value>Paste as markdown</value>

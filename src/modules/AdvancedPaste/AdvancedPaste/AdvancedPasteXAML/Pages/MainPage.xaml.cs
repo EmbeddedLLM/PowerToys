@@ -39,6 +39,15 @@ namespace AdvancedPaste.Pages
                 new PasteFormat { Icon = new FontIcon() { Glyph = "\uE8E9" }, Name = ResourceLoaderInstance.ResourceLoader.GetString("PasteAsPlainText"), Format = PasteFormats.PlainText },
                 new PasteFormat { Icon = new FontIcon() { Glyph = "\ue8a5" }, Name = ResourceLoaderInstance.ResourceLoader.GetString("PasteAsMarkdown"), Format = PasteFormats.Markdown },
                 new PasteFormat { Icon = new FontIcon() { Glyph = "\uE943" }, Name = ResourceLoaderInstance.ResourceLoader.GetString("PasteAsJson"), Format = PasteFormats.Json },
+                new PasteFormat { Icon = new FontIcon() { Glyph = "\uE945" }, Name = ResourceLoaderInstance.ResourceLoader.GetString("ProofreadAndPasteAsPlainText"), Format = PasteFormats.Proofread },
+                new PasteFormat { Icon = new FontIcon() { Glyph = "\uE945" }, Name = ResourceLoaderInstance.ResourceLoader.GetString("RewriteAndPasteAsPlainText"), Format = PasteFormats.Rewrite },
+                new PasteFormat { Icon = new FontIcon() { Glyph = "\uE945" }, Name = ResourceLoaderInstance.ResourceLoader.GetString("RewriteProfessionallyAndPasteAsPlainText"), Format = PasteFormats.WriteProfessionally },
+                new PasteFormat { Icon = new FontIcon() { Glyph = "\uE945" }, Name = ResourceLoaderInstance.ResourceLoader.GetString("RewriteConciselyAndPasteAsPlainText"), Format = PasteFormats.WriteConcisely },
+                new PasteFormat { Icon = new FontIcon() { Glyph = "\uE945" }, Name = ResourceLoaderInstance.ResourceLoader.GetString("RewriteFriendlyAndPasteAsPlainText"), Format = PasteFormats.WriteFriendly },
+                new PasteFormat { Icon = new FontIcon() { Glyph = "\uE945" }, Name = ResourceLoaderInstance.ResourceLoader.GetString("SummarizeAndPasteAsPlainText"), Format = PasteFormats.Summarize },
+                new PasteFormat { Icon = new FontIcon() { Glyph = "\uE945" }, Name = ResourceLoaderInstance.ResourceLoader.GetString("SummarizeToKeyPointsAndPasteAsPlainText"), Format = PasteFormats.SummarizeToKeyPoints },
+                new PasteFormat { Icon = new FontIcon() { Glyph = "\uE945" }, Name = ResourceLoaderInstance.ResourceLoader.GetString("SummarizeToTableAndPasteAsPlainText"), Format = PasteFormats.SummarizeToTable },
+                new PasteFormat { Icon = new FontIcon() { Glyph = "\uE945" }, Name = ResourceLoaderInstance.ResourceLoader.GetString("SummarizeToListAndPasteAsPlainText"), Format = PasteFormats.SummarizeToList },
             ];
 
             ViewModel = App.GetService<OptionsViewModel>();
@@ -150,6 +159,51 @@ namespace AdvancedPaste.Pages
             ViewModel.ToJsonFunction();
         }
 
+        private void Proofread()
+        {
+            ViewModel.ProofreadFunction();
+        }
+
+        private void Rewrite()
+        {
+            ViewModel.RewriteFunction();
+        }
+
+        private void RewriteProfessionally()
+        {
+            ViewModel.RewriteProfessionallyFunction();
+        }
+
+        private void RewriteConcisely()
+        {
+            ViewModel.RewriteConciselyFunction();
+        }
+
+        private void RewriteFriendly()
+        {
+            ViewModel.RewriteFriendlyFunction();
+        }
+
+        private void Summarize()
+        {
+            ViewModel.SummarizeFunction();
+        }
+
+        private void SummarizeToKeyPoints()
+        {
+            ViewModel.SummarizeToKeyPointsFunction();
+        }
+
+        private void SummarizeToTable()
+        {
+            ViewModel.SummarizeToTableFunction();
+        }
+
+        private void SummarizeToList()
+        {
+            ViewModel.SummarizeToListFunction();
+        }
+
         private void PasteOptionsListView_ItemClick(object sender, ItemClickEventArgs e)
         {
             if (e.ClickedItem is PasteFormat format)
@@ -174,6 +228,78 @@ namespace AdvancedPaste.Pages
                         {
                             PasteAsJson();
                             PowerToysTelemetry.Log.WriteEvent(new Telemetry.AdvancedPasteFormatClickedEvent(PasteFormats.Json));
+                            break;
+                        }
+
+                    case PasteFormats.Rewrite:
+                        {
+                            // Placeholder
+                            Rewrite();
+                            PowerToysTelemetry.Log.WriteEvent(new Telemetry.AdvancedPasteFormatClickedEvent(PasteFormats.Rewrite));
+                            break;
+                        }
+
+                    case PasteFormats.Proofread:
+                        {
+                            // Placeholder
+                            Proofread();
+                            PowerToysTelemetry.Log.WriteEvent(new Telemetry.AdvancedPasteFormatClickedEvent(PasteFormats.Proofread));
+                            break;
+                        }
+
+                    case PasteFormats.WriteProfessionally:
+                        {
+                            // Placeholder
+                            RewriteProfessionally();
+                            PowerToysTelemetry.Log.WriteEvent(new Telemetry.AdvancedPasteFormatClickedEvent(PasteFormats.WriteProfessionally));
+                            break;
+                        }
+
+                    case PasteFormats.WriteConcisely:
+                        {
+                            // Placeholder
+                            RewriteConcisely();
+                            PowerToysTelemetry.Log.WriteEvent(new Telemetry.AdvancedPasteFormatClickedEvent(PasteFormats.WriteConcisely));
+                            break;
+                        }
+
+                    case PasteFormats.WriteFriendly:
+                        {
+                            // Placeholder
+                            RewriteFriendly();
+                            PowerToysTelemetry.Log.WriteEvent(new Telemetry.AdvancedPasteFormatClickedEvent(PasteFormats.WriteFriendly));
+                            break;
+                        }
+
+                    case PasteFormats.Summarize:
+                        {
+                            // Placeholder
+                            Summarize();
+                            PowerToysTelemetry.Log.WriteEvent(new Telemetry.AdvancedPasteFormatClickedEvent(PasteFormats.Summarize));
+                            break;
+                        }
+
+                    case PasteFormats.SummarizeToKeyPoints:
+                        {
+                            // Placeholder
+                            SummarizeToKeyPoints();
+                            PowerToysTelemetry.Log.WriteEvent(new Telemetry.AdvancedPasteFormatClickedEvent(PasteFormats.SummarizeToKeyPoints));
+                            break;
+                        }
+
+                    case PasteFormats.SummarizeToTable:
+                        {
+                            // Placeholder
+                            SummarizeToTable();
+                            PowerToysTelemetry.Log.WriteEvent(new Telemetry.AdvancedPasteFormatClickedEvent(PasteFormats.SummarizeToTable));
+                            break;
+                        }
+
+                    case PasteFormats.SummarizeToList:
+                        {
+                            // Placeholder
+                            SummarizeToList();
+                            PowerToysTelemetry.Log.WriteEvent(new Telemetry.AdvancedPasteFormatClickedEvent(PasteFormats.SummarizeToList));
                             break;
                         }
                 }
@@ -213,6 +339,69 @@ namespace AdvancedPaste.Pages
                         break;
                     }
 
+                // case VirtualKey.Number4:
+                //    {
+                //        // Placeholder
+                //        Proofread();
+                //        PowerToysTelemetry.Log.WriteEvent(new Telemetry.AdvancedPasteFormatClickedEvent(PasteFormats.WriteProfessionally));
+                //        break;
+                //    }
+
+                // case VirtualKey.Number5:
+                //    {
+                //        // Placeholder
+                //        RewriteProfessionally();
+                //        PowerToysTelemetry.Log.WriteEvent(new Telemetry.AdvancedPasteFormatClickedEvent(PasteFormats.WriteProfessionally));
+                //        break;
+                //    }
+
+                // case VirtualKey.Number6:
+                //    {
+                //        // Placeholder
+                //        RewriteConcisely();
+                //        PowerToysTelemetry.Log.WriteEvent(new Telemetry.AdvancedPasteFormatClickedEvent(PasteFormats.WriteProfessionally));
+                //        break;
+                //    }
+
+                // case VirtualKey.Number7:
+                //    {
+                //        // Placeholder
+                //        RewriteFriendly();
+                //        PowerToysTelemetry.Log.WriteEvent(new Telemetry.AdvancedPasteFormatClickedEvent(PasteFormats.WriteProfessionally));
+                //        break;
+                //    }
+
+                // case VirtualKey.Number8:
+                //    {
+                //        // Placeholder
+                //        Summarize();
+                //        PowerToysTelemetry.Log.WriteEvent(new Telemetry.AdvancedPasteFormatClickedEvent(PasteFormats.WriteProfessionally));
+                //        break;
+                //    }
+
+                // case VirtualKey.Number9:
+                //    {
+                //        // Placeholder
+                //        SummarizeToKeyPoints();
+                //        PowerToysTelemetry.Log.WriteEvent(new Telemetry.AdvancedPasteFormatClickedEvent(PasteFormats.WriteProfessionally));
+                //        break;
+                //    }
+
+                // case VirtualKey.Number10:
+                //    {
+                //        // Placeholder
+                //        SummarizeToKeyPoints();
+                //        PowerToysTelemetry.Log.WriteEvent(new Telemetry.AdvancedPasteFormatClickedEvent(PasteFormats.WriteProfessionally));
+                //        break;
+                //    }
+
+                // case VirtualKey.Number11:
+                //    {
+                //        // Placeholder
+                //        SummarizeToKeyPoints();
+                //        PowerToysTelemetry.Log.WriteEvent(new Telemetry.AdvancedPasteFormatClickedEvent(PasteFormats.WriteProfessionally));
+                //        break;
+                //    }
                 default:
                     break;
             }

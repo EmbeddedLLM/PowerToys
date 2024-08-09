@@ -88,7 +88,9 @@ namespace AdvancedPaste.ViewModels
             {
                 var openAIKey = AICompletionsHelper.LoadOpenAIKey();
                 var currentKey = aiHelper.GetKey();
-                bool keyChanged = openAIKey != currentKey;
+                var localLLMEndpoint = AICompletionsHelper.LoadLocalLLMEndpoint();
+                var currentLocalLLMEndpoint = aiHelper.GetLocallLLMEndpoint();
+                bool keyChanged = (openAIKey != currentKey) || (localLLMEndpoint != currentLocalLLMEndpoint);
 
                 if (keyChanged)
                 {
@@ -97,6 +99,7 @@ namespace AdvancedPaste.ViewModels
                     Task.Run(() =>
                     {
                         aiHelper.SetOpenAIKey(openAIKey);
+                        aiHelper.SetLocallLLMEndpoint(localLLMEndpoint);
                     }).ContinueWith(
                         (t) =>
                         {
@@ -297,6 +300,303 @@ namespace AdvancedPaste.ViewModels
                 SetClipboardContentAndHideWindow(jsonText);
 
                 if (pasteAlways || _userSettings.SendPasteKeyCombination)
+                {
+                    ClipboardHelper.SendPasteKeyCombination();
+                }
+            }
+            catch
+            {
+            }
+        }
+
+        internal void ProofreadFunction(bool pasteAlways = false)
+        {
+            Logger.LogTrace();
+
+            try
+            {
+                Logger.LogTrace();
+
+                string outputString = MarkdownHelper.PasteAsPlainTextFromClipboard(ClipboardData);
+
+                if (!string.IsNullOrWhiteSpace(outputString))
+                {
+                    Logger.LogWarning("Clipboard has no usable text data");
+
+                    string systemInstructions = "I will carefully review the text for spelling, grammar, and punctuation errors, then provide corrections and suggestions for improvement.";
+                    string inputInstructions = "Please proofread the following text for errors:";
+                    var aiResponse = aiHelper.AISIIFormatString(systemInstructions, inputInstructions, outputString);
+
+                    outputString = aiResponse.Response;
+                }
+
+                SetClipboardContentAndHideWindow(outputString);
+
+                if (_userSettings.SendPasteKeyCombination)
+                {
+                    ClipboardHelper.SendPasteKeyCombination();
+                }
+            }
+            catch
+            {
+            }
+        }
+
+        internal void RewriteFunction(bool pasteAlways = false)
+        {
+            Logger.LogTrace();
+
+            try
+            {
+                Logger.LogTrace();
+
+                string outputString = MarkdownHelper.PasteAsPlainTextFromClipboard(ClipboardData);
+
+                if (!string.IsNullOrWhiteSpace(outputString))
+                {
+                    Logger.LogWarning("Clipboard has no usable text data");
+
+                    string systemInstructions = "I will rephrase the given text to enhance its readability and coherence while maintaining the original meaning.";
+                    string inputInstructions = "Rewrite this text to improve its clarity and flow:";
+                    var aiResponse = aiHelper.AISIIFormatString(systemInstructions, inputInstructions, outputString);
+
+                    outputString = aiResponse.Response;
+                }
+
+                SetClipboardContentAndHideWindow(outputString);
+
+                if (_userSettings.SendPasteKeyCombination)
+                {
+                    ClipboardHelper.SendPasteKeyCombination();
+                }
+            }
+            catch
+            {
+            }
+        }
+
+        internal void RewriteProfessionallyFunction(bool pasteAlways = false)
+        {
+            Logger.LogTrace();
+
+            try
+            {
+                Logger.LogTrace();
+
+                string outputString = MarkdownHelper.PasteAsPlainTextFromClipboard(ClipboardData);
+
+                if (!string.IsNullOrWhiteSpace(outputString))
+                {
+                    Logger.LogWarning("Clipboard has no usable text data");
+
+                    string systemInstructions = "I will refine the language to be more formal, precise, and suitable for a professional context.";
+                    string inputInstructions = "Adjust this text to have a more professional tone:";
+                    var aiResponse = aiHelper.AISIIFormatString(systemInstructions, inputInstructions, outputString);
+
+                    outputString = aiResponse.Response;
+                }
+
+                SetClipboardContentAndHideWindow(outputString);
+
+                if (_userSettings.SendPasteKeyCombination)
+                {
+                    ClipboardHelper.SendPasteKeyCombination();
+                }
+            }
+            catch
+            {
+            }
+        }
+
+        internal void RewriteConciselyFunction(bool pasteAlways = false)
+        {
+            Logger.LogTrace();
+
+            try
+            {
+                Logger.LogTrace();
+
+                string outputString = MarkdownHelper.PasteAsPlainTextFromClipboard(ClipboardData);
+
+                if (!string.IsNullOrWhiteSpace(outputString))
+                {
+                    Logger.LogWarning("Clipboard has no usable text data");
+
+                    string systemInstructions = "I will condense the given text, removing unnecessary details while preserving the core message and key information.";
+                    string inputInstructions = "Shorten this text while keeping the main points:";
+                    var aiResponse = aiHelper.AISIIFormatString(systemInstructions, inputInstructions, outputString);
+
+                    outputString = aiResponse.Response;
+                }
+
+                SetClipboardContentAndHideWindow(outputString);
+
+                if (_userSettings.SendPasteKeyCombination)
+                {
+                    ClipboardHelper.SendPasteKeyCombination();
+                }
+            }
+            catch
+            {
+            }
+        }
+
+        internal void RewriteFriendlyFunction(bool pasteAlways = false)
+        {
+            Logger.LogTrace();
+
+            try
+            {
+                Logger.LogTrace();
+
+                string outputString = MarkdownHelper.PasteAsPlainTextFromClipboard(ClipboardData);
+
+                if (!string.IsNullOrWhiteSpace(outputString))
+                {
+                    Logger.LogWarning("Clipboard has no usable text data");
+
+                    string systemInstructions = "I will revise the text to adopt a warmer, more conversational tone that engages the reader in a friendly manner.";
+                    string inputInstructions = "Make this text sound more friendly and approachable:";
+                    var aiResponse = aiHelper.AISIIFormatString(systemInstructions, inputInstructions, outputString);
+
+                    outputString = aiResponse.Response;
+                }
+
+                SetClipboardContentAndHideWindow(outputString);
+
+                if (_userSettings.SendPasteKeyCombination)
+                {
+                    ClipboardHelper.SendPasteKeyCombination();
+                }
+            }
+            catch
+            {
+            }
+        }
+
+        internal void SummarizeFunction(bool pasteAlways = false)
+        {
+            Logger.LogTrace();
+
+            try
+            {
+                Logger.LogTrace();
+
+                string outputString = MarkdownHelper.PasteAsPlainTextFromClipboard(ClipboardData);
+
+                if (!string.IsNullOrWhiteSpace(outputString))
+                {
+                    Logger.LogWarning("Clipboard has no usable text data");
+
+                    string systemInstructions = "I will create a concise overview that captures the main ideas and essential points of the given text.";
+                    string inputInstructions = "Provide a brief summary of the following text:";
+                    var aiResponse = aiHelper.AISIIFormatString(systemInstructions, inputInstructions, outputString);
+
+                    outputString = aiResponse.Response;
+                }
+
+                SetClipboardContentAndHideWindow(outputString);
+
+                if (_userSettings.SendPasteKeyCombination)
+                {
+                    ClipboardHelper.SendPasteKeyCombination();
+                }
+            }
+            catch
+            {
+            }
+        }
+
+        internal void SummarizeToKeyPointsFunction(bool pasteAlways = false)
+        {
+            Logger.LogTrace();
+
+            try
+            {
+                Logger.LogTrace();
+
+                string outputString = MarkdownHelper.PasteAsPlainTextFromClipboard(ClipboardData);
+
+                if (!string.IsNullOrWhiteSpace(outputString))
+                {
+                    Logger.LogWarning("Clipboard has no usable text data");
+
+                    string systemInstructions = "I will identify and list the most important ideas and information from the given text in a clear, bullet-point format.";
+                    string inputInstructions = "Extract the key points from this text:";
+                    var aiResponse = aiHelper.AISIIFormatString(systemInstructions, inputInstructions, outputString);
+
+                    outputString = aiResponse.Response;
+                }
+
+                SetClipboardContentAndHideWindow(outputString);
+
+                if (_userSettings.SendPasteKeyCombination)
+                {
+                    ClipboardHelper.SendPasteKeyCombination();
+                }
+            }
+            catch
+            {
+            }
+        }
+
+        internal void SummarizeToTableFunction(bool pasteAlways = false)
+        {
+            Logger.LogTrace();
+
+            try
+            {
+                Logger.LogTrace();
+
+                string outputString = MarkdownHelper.PasteAsPlainTextFromClipboard(ClipboardData);
+
+                if (!string.IsNullOrWhiteSpace(outputString))
+                {
+                    Logger.LogWarning("Clipboard has no usable text data");
+
+                    string systemInstructions = "I will structure the given information into a clear, easy-to-read table with appropriate columns and rows.";
+                    string inputInstructions = "Organize the information in this text into a table format:";
+                    var aiResponse = aiHelper.AISIIFormatString(systemInstructions, inputInstructions, outputString);
+
+                    outputString = aiResponse.Response;
+                }
+
+                SetClipboardContentAndHideWindow(outputString);
+
+                if (_userSettings.SendPasteKeyCombination)
+                {
+                    ClipboardHelper.SendPasteKeyCombination();
+                }
+            }
+            catch
+            {
+            }
+        }
+
+        internal void SummarizeToListFunction(bool pasteAlways = false)
+        {
+            Logger.LogTrace();
+
+            try
+            {
+                Logger.LogTrace();
+
+                string outputString = MarkdownHelper.PasteAsPlainTextFromClipboard(ClipboardData);
+
+                if (!string.IsNullOrWhiteSpace(outputString))
+                {
+                    Logger.LogWarning("Clipboard has no usable text data");
+
+                    string systemInstructions = "I will reorganize the information from the given text into a bulleted or numbered list format for easier reading and comprehension.";
+                    string inputInstructions = "Convert this text into a structured list:";
+                    var aiResponse = aiHelper.AISIIFormatString(systemInstructions, inputInstructions, outputString);
+
+                    outputString = aiResponse.Response;
+                }
+
+                SetClipboardContentAndHideWindow(outputString);
+
+                if (_userSettings.SendPasteKeyCombination)
                 {
                     ClipboardHelper.SendPasteKeyCombination();
                 }

@@ -91,6 +91,8 @@ namespace AdvancedPaste
             NativeEventWaiter.WaitForEventLoop(interop.Constants.ShowAdvancedPasteSharedEvent(), OnAdvancedPasteHotkey);
             NativeEventWaiter.WaitForEventLoop(interop.Constants.AdvancedPasteMarkdownEvent(), OnAdvancedPasteMarkdownHotkey);
             NativeEventWaiter.WaitForEventLoop(interop.Constants.AdvancedPasteJsonEvent(), OnAdvancedPasteJsonHotkey);
+
+            // NativeEventWaiter.WaitForEventLoop(interop.Constants.AdvancedPasteRewriteProfessionallyEvent(), OnAdvancedPasteRewriteProfessionallyHotkey);
         }
 
         private void App_UnhandledException(object sender, Microsoft.UI.Xaml.UnhandledExceptionEventArgs e)
@@ -110,6 +112,11 @@ namespace AdvancedPaste
             viewModel.ToMarkdownFunction(true);
         }
 
+        // private void OnAdvancedPasteRewriteProfessionallyHotkey()
+        // {
+        //      viewModel.GetClipboardData();
+        //    viewModel.RewriteProfessionallyFunction(true);
+        // }
         private void OnAdvancedPasteHotkey()
         {
             viewModel.OnShow();
